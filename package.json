@@ -1,22 +1,20 @@
 {
-  "name": "getting-started",
+  "name": "npc",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deployCommands": "node src/deployCommands.js"
   },
-  "author": "Shay DeWael",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "discord-interactions": "^3.2.0",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "node-fetch": "^3.3.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
+    "@discordjs/builders": "^1.4.0",
+    "@discordjs/rest": "^1.5.0",
+    "discord-api-types": "^0.37.29",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
   }
 }
