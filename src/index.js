@@ -23,6 +23,9 @@ client.on("interactionCreate", async (interaction) => {
     if(interaction.type !== InteractionType.ApplicationCommand) return;
 
     if(interaction.commandName === 'ping'){
+        await interaction.reply('ping');
+    }
+    if(interaction.commandName === 'lul'){
         await interaction.reply('lul');
     }
 })
