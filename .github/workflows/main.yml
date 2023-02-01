@@ -1,0 +1,17 @@
+name: Publish to Docker Hub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    build-bot:
+      runs-on: ubuntu-latest
+      steps:
+          - uses: actions/checkout@v2
+          - name: Login, Build and Push to Docker hub 
+            run: |
+                echo "${{ secrets.DOCKER_API_TOKEN }}" | docker login -u lupree --password-stdin
+                docker build -t lupree/npc:latest .
+                docker push lupree/npc:latest
