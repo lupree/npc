@@ -2,7 +2,10 @@ require("dotenv").config()
 const fs = require("fs")
 const { Client, Collection, InteractionType } = require("discord.js")
 
-const client = new Client({intents:[]})
+const client = new Client({
+    intents:[GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages]
+})
+
 client.commands = new Collection()
 
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js')); 
@@ -12,22 +15,14 @@ commandFiles.forEach((commandFile) => {
     client.commands.set(command.data.name, command)
 })
 
-client.once("ready", () => {
-    
-    console.log(`Ready! Logged in as ${client.user.tag}! I'm on ${client.guilds.cache.size} guild(s)!`)
-    client.user.setActivity({name: "mit dem Code", type: "PLAYING"})
-    
-})
+const logo = require("./utils/logo.txt");
 
-client.on("interactionCreate", async (interaction) => {
-    if(interaction.type !== InteractionType.ApplicationCommand) return;
+async function init() {
+    console.log(`${logo}`.blue);
+    console.log(`Discord.JS Version: ${require("discord.js/package.json").version}`.blue + "\n")
+    console.log(`Starting Saturn...`.yellow);
 
-    if(interaction.commandName === 'ping'){
-        await interaction.reply('ping');
-    }
-    if(interaction.commandName === 'lul'){
-        await interaction.reply('lul');
-    }
-})
-
-client.login(process.env.TOKEN)
+    require('./handlers/events')(client);
+    require('./handlers/commands')(client);
+    client.login(process.env.TOKEN);
+}
