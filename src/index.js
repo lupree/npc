@@ -15,10 +15,8 @@ commandFiles.forEach((commandFile) => {
     client.commands.set(command.data.name, command)
 })
 
-const logo = require("./utils/logo.txt");
-
 async function init() {
-    console.log(`${logo}`.blue);
+    console.log(`npc-bot`.blue);
     console.log(`Discord.JS Version: ${require("discord.js/package.json").version}`.blue + "\n")
     console.log(`Starting Saturn...`.yellow);
 
