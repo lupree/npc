@@ -1,10 +1,8 @@
-const { clientId } = require('../config/bot.json')
 const fs = require('fs')
 const { REST } = require('@discordjs/rest')
 const { Routes } = require('discord-api-types/v10')
 const commands = []
 require("dotenv").config()
-
 
 module.exports = client => {    
     console.log(`Loading Commands...`.yellow)

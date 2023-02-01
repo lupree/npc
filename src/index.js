@@ -1,4 +1,5 @@
 require("dotenv").config()
+const colors = require("colors");
 const fs = require("fs")
 const { Client, Collection, GatewayIntentBits } = require("discord.js")
 
@@ -15,12 +16,10 @@ commandFiles.forEach((commandFile) => {
     client.commands.set(command.data.name, command)
 })
 
-async function init() {
-    console.log(`npc-bot`.blue);
-    console.log(`Discord.JS Version: ${require("discord.js/package.json").version}`.blue + "\n")
-    console.log(`Starting Saturn...`.yellow);
+console.log(`Discord.JS Version: ${require("discord.js/package.json").version}`.blue + "\n")
+console.log(`Starting npc...`.yellow);
 
-    require('./handlers/events')(client);
-    require('./handlers/commands')(client);
-    client.login(process.env.TOKEN);
-}
+require('./handlers/events')(client);
+require('./handlers/commands')(client);
+
+client.login(process.env.TOKEN);

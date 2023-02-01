@@ -4,7 +4,8 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('lul')
         .setDescription('Description'),
-    async execute(interaction) {
-        await interaction.reply("lul");
+    async execute(client, interaction) {
+        console.log(interaction)
+        interaction.reply("lul");
     }
 }
