@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require("discord.js")
-const fs = require("fs")
 
 module.exports = {
     name: "guildDelete",
@@ -15,6 +14,5 @@ module.exports = {
         const channel = client.channels.cache.get("1070302765953331201")
         channel.send({embeds: [ownerEmbed]})
         console.log(`Left Guild! Name: ${(guild.name).green} ID: ${(guild.id).green}`)
-        fs.appendFile('../../logs/join-leave.log', `Joined Guild! Name: ${(guild.name).green} ID: ${(guild.id).green}`)
     },
 };
