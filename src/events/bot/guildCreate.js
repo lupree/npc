@@ -6,7 +6,7 @@ module.exports = {
     run: async (guild, client) => {
         const ownerEmbed = new EmbedBuilder()
         .setTitle("npc - joined guild")
-        .setColor(0x800000)
+        .setColor(0x008000)
         .setTimestamp(new Date)
         .setThumbnail(`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`)
         .setDescription(` **Guild Name** ${guild.name} \n **Guild ID:** ${guild.id} \n **Guild Owner**: <@${guild.ownerId}> `)

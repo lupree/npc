@@ -36,14 +36,11 @@ module.exports = client => {
             await rest.put(
                 Routes.applicationCommands(process.env.CLIENT_ID),
                 { body: commands },
-            )
-
-            console.log('Successfully reloaded application (/) commands.'.green);
+            ).then(console.log('Successfully reloaded application (/) commands.'.green))
             
         } catch (error) {
             console.log('Failed to refresh application (/) commands...'.red);
             console.error(error);
         }
     })();
-    
 }
