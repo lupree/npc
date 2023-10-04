@@ -14,5 +14,11 @@ module.exports = {
         const channel = client.channels.cache.get("1070302765953331201")
         channel.send({embeds: [ownerEmbed]})
         console.log(`Joined Guild! Name: ${(guild.name).green} ID: ${(guild.id).green}`)
+
+        guild.roles.create({
+            name: "Minecraft",
+            color: "GREEN"
+        })
+        .then(console.log)
     },
 };
