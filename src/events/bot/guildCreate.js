@@ -17,7 +17,7 @@ module.exports = {
 
         guild.roles.create({
             name: "Minecraft",
-            color: "GREEN"
+            color: "#008000"
         })
         .then(console.log)
     },
