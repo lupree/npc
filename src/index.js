@@ -21,45 +21,9 @@ commandFiles.forEach((commandFile) => {
 console.log(`Discord.JS Version: ${require("discord.js/package.json").version}`.blue + "\n")
 console.log(`Starting npc...`.yellow);
 
-client.on('voiceStateUpdate', (oldState, newState) => {
-    const oldChannel = oldState.channel;
-    const newChannel = newState.channel;
-    if(newChannel){
-        if(newChannel.id == '973203175253352522'){
-            const user = newState.member;
-            const guild = user.guild;
-
-            const createdChannel = guild.channels.create({
-                name: `⌛ ${user.displayName}'s Channel`,
-                type: '2',
-                parent: '973203175253352520',
-                permissionOverwrites: [
-                    {
-                        id: user.id,
-                        allow: ['ViewChannel', 'Connect', 'KickMembers', "ManageChannels", 'ModerateMembers', 'MuteMembers']
-                    },
-                    {
-                        id: guild.id,
-                        allow: ['ViewChannel', 'Connect']
-                    }
-                ],
-                userLimit: 5,
-            }).then(channel => {
-                user.voice.setChannel(channel.id);
-            })
-            console.log(`${newState.member.user.tag}'s Voice State changed`);
-        }
-    }
-    if(oldChannel){
-        if(oldChannel.name.startsWith('⌛')){
-            if(oldChannel.members.size === 0){
-                oldChannel.delete()
-            }
-        }
-    }
-})
+database.createTable("TMP_CHANNELS", "ChannelId varchar(255), GuildId varchar(255)")
 
 require('./handlers/events')(client);
 require('./handlers/commands')(client);
-
+require('./handlers/tempchannels')(client);
 client.login(process.env.TOKEN);

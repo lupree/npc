@@ -1,3 +1,4 @@
+const { channelLink } = require("discord.js");
 const mysql = require("mysql");
 
 var connection = mysql.createConnection({
@@ -38,12 +39,32 @@ module.exports = {
         );
     },
 
+    createTmpChannel(channelId, serverId) {
+        connection.query(
+            `INSERT INTO TMP_CHANNELS VALUES (${channelId}, ${serverId})`,
+            function (error, results, fields) {}
+        );
+    },
+
+    deleteTmpChannel(channelId) {
+        connection.query(
+            `DELETE FROM TMP_CHANNELS WHERE ChannelId=${channelId}`,
+            function (error, results, fields) {}
+        );
+    },
+
     getTable(name, primary, content, callback) {
         connection.query(`SELECT ${content} FROM ${name} WHERE ID=${primary}`, function (error, results, fields) {
             return callback(results[0][content]);
         });
     },
 
+    getTmpChannels(guildId, callback) {
+        connection.query(`SELECT * FROM TMP_CHANNELS WHERE GuildId=${guildId}`, function (error, results, fields) {
+            return callback(results)
+        });
+    },
+    
     editTable(name, primary, content, contentValue) {
         connection.query(
             `UPDATE ${name} SET ${content}=${contentValue} WHERE ID=${primary}`,
