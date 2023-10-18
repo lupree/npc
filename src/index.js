@@ -22,8 +22,12 @@ console.log(`Discord.JS Version: ${require("discord.js/package.json").version}`.
 console.log(`Starting npc...`.yellow);
 
 database.createTable("TMP_CHANNELS", "ChannelId varchar(255), GuildId varchar(255)")
+database.createTable("GUILDS", "GuildId varchar(255), Name varchar(255)")
 
 require('./handlers/events')(client);
 require('./handlers/commands')(client);
 require('./handlers/tempchannels')(client);
+
 client.login(process.env.TOKEN);
+
+require('./handlers/daily')(client);

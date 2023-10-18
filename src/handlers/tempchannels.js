@@ -28,14 +28,14 @@ module.exports = client => {
                     user.voice.setChannel(channel.id);
                     console.log(`${newState.member.user.tag}'s Voice State changed`);
                     console.log(`${newState.member.user.tag} was moved to Channel: ${channel.id}`)
-                    database.createTmpChannel(channel.id, guild.id)
+                    database.createRow('TMP_CHANNELS', `("${channel.id}", "${guild.id}")`)
                 })
             }
         }
         if(oldChannel){
             $tmpChannels = database.getTmpChannels(oldChannel.guild.id, function (callback) {
                 callback.forEach((channel) => {
-                    if(channel.ChannelId === oldChannel.id){
+                    if(channel.ChannelId === oldChannel.id && oldChannel.members.size === 0){
                         oldChannel.delete()
                         database.deleteTmpChannel(oldChannel.id)
                     }

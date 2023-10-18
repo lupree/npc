@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require("discord.js")
+const database = require("../../handlers/database");
 
 module.exports = {
     name: "guildCreate",
@@ -14,11 +15,6 @@ module.exports = {
         const channel = client.channels.cache.get("1070302765953331201")
         channel.send({embeds: [ownerEmbed]})
         console.log(`Joined Guild! Name: ${(guild.name).green} ID: ${(guild.id).green}`)
-
-        guild.roles.create({
-            name: "Minecraft",
-            color: "#008000"
-        })
-        .then(console.log)
+        database.createRow('GUILDS', `("${guild.id}", "${guild.name}")`)
     },
 };

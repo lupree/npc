@@ -1,12 +1,14 @@
 const { channelLink } = require("discord.js");
 const mysql = require("mysql");
+require("dotenv").config()
 
 var connection = mysql.createConnection({
-    host: "srv1.lupree.com",
+    host: "lupree-p1-mysql-npcdb-01.mysql.database.azure.com",
     port: 3306,
-    user: "npc",
-    password: "gXJG0MPfGOnVsghk57V$",
-    database: "npc",
+    user: "lupree_p1_myssql_root",
+    password: process.env.DB_PASSWORD,
+    database: "lupree-p1-mysql-npcdb-01",
+    ssl: true
 });
 
 connection.connect(function (err) {
@@ -37,6 +39,10 @@ module.exports = {
             `INSERT INTO ${name} (\`ID\`, \`${content}\`) VALUES (${id}, ${contentVlaue})`,
             function (error, results, fields) {}
         );
+    },
+
+    createRow(table, data) {
+        connection.query(`INSERT INTO ${table} VALUES ${data}`)
     },
 
     createTmpChannel(channelId, serverId) {
